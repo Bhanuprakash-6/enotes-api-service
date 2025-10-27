@@ -1,6 +1,6 @@
 package com.example.enotes_api.Entity;
 
-import java.sql.Date;
+ 
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

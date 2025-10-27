@@ -4,15 +4,16 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.enotes_api.Entity.Category;
+import com.example.enotes_api.Dto.CategoryDto;
+import com.example.enotes_api.Dto.CategoryResponseDto;
+ 
 
 @Service
 public interface CategoryService {
 
-    public Boolean saveCategory(Category category);
+    public Boolean saveCategoryC(CategoryDto categoryDto);
 
-    public List<Category> getAllCategory();
+    public List<CategoryDto> getAllCategory();
 
-    
-    
+    public List<CategoryResponseDto> getActiveCategory();
 }
