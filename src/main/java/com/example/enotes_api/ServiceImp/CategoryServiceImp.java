@@ -2,6 +2,7 @@ package com.example.enotes_api.ServiceImp;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -59,9 +60,43 @@ public class CategoryServiceImp implements CategoryService{
     @Override
     public List<CategoryResponseDto> getActiveCategory() {
         List<Category> gotC = categoryRepo.findByActiveTrue();
-
         return gotC.stream().map(cat -> mapper.map(cat, CategoryResponseDto.class)).toList();
+    }
+
+    @Override
+    public CategoryDto getById(Integer id) {
+        Optional<Category> got = categoryRepo.findByIdAndIsDeletedFalse(id);
+        if(got.isPresent()){
+            Category category = got.get();
+            return mapper.map(category, CategoryDto.class);
+        }
+
+        return null;
+    }
+
+    @Override
+    public Boolean deleteById(Integer id) {
+        Optional<Category> got = categoryRepo.findById(id);
+        if(got.isPresent()){
+            Category category = got.get();
+            category.setIs_delete(true);
+            categoryRepo.save(category);
+            return true;
+        }
+
+        return false;
+        
         
     }
+
+    @Override
+    public List<CategoryResponseDto> getActiveNotDeleted() {
+         List<Category> gotC = categoryRepo.findByActiveTrueAndNotDeleted();
+         return gotC.stream().map(cat -> mapper.map(cat, CategoryResponseDto.class)).toList();
+    }
+
+    
+
+    
     
 }
