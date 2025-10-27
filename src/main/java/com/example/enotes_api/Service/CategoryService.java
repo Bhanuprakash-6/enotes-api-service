@@ -15,5 +15,5 @@ public interface CategoryService {
 
     public List<CategoryDto> getAllCategory();
 
-    //public List<CategoryResponseDto> getActiveCategory();
+    public List<CategoryResponseDto> getActiveCategory();
 }

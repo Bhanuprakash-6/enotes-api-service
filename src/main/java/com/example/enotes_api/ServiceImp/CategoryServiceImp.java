@@ -56,12 +56,12 @@ public class CategoryServiceImp implements CategoryService{
         return categoryDtoList;
     }
     
-    // @Override
-    // public List<CategoryResponseDto> getActiveCategory() {
-    //     List<Category> gotC = categoryRepo.findByActiveTrue();
+    @Override
+    public List<CategoryResponseDto> getActiveCategory() {
+        List<Category> gotC = categoryRepo.findByActiveTrue();
 
-    //     return gotC.stream().map(cat -> mapper.map(cat, CategoryResponseDto.class)).toList();
+        return gotC.stream().map(cat -> mapper.map(cat, CategoryResponseDto.class)).toList();
         
-    // }
+    }
     
 }

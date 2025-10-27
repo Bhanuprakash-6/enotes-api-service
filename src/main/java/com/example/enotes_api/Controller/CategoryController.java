@@ -42,14 +42,14 @@ public class CategoryController {
         }
     }
 
-    // @GetMapping("getActive-category")
-    // public ResponseEntity<?> getActiveCategories() {
-    //     List<CategoryResponseDto> gotC = categoryService.getActiveCategory();
-    //     if (org.springframework.util.CollectionUtils.isEmpty(gotC)) {
-    //         return ResponseEntity.noContent().build();
-    //     } else {
-    //         return new ResponseEntity<>(gotC,HttpStatus.OK);
-    //     }
-    // }
+    @GetMapping("getActive-category")
+    public ResponseEntity<?> getActiveCategories() {
+        List<CategoryResponseDto> gotC = categoryService.getActiveCategory();
+        if (org.springframework.util.CollectionUtils.isEmpty(gotC)) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return new ResponseEntity<>(gotC,HttpStatus.OK);
+        }
+    }
 
 }
