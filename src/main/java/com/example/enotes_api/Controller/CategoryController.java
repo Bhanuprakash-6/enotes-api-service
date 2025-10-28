@@ -20,6 +20,8 @@ import com.example.enotes_api.Dto.CategoryResponseDto;
 import com.example.enotes_api.Entity.Category;
 import com.example.enotes_api.Service.CategoryService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("api/v1/category")
 public class CategoryController {
@@ -27,7 +29,7 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @PostMapping("save-category")
-    public ResponseEntity<?> saveCategory(@RequestBody CategoryDto categoryDto) {
+    public ResponseEntity<?> saveCategory(@Valid @RequestBody CategoryDto categoryDto) {
         Boolean savedC = categoryService.saveCategoryC(categoryDto);
         if (savedC) {
             return new ResponseEntity<>("saved", HttpStatus.CREATED);

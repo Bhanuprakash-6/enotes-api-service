@@ -9,15 +9,20 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
-
+import com.example.enotes_api.Controller.CategoryController;
 import com.example.enotes_api.Dto.CategoryDto;
 import com.example.enotes_api.Dto.CategoryResponseDto;
+import com.example.enotes_api.EnotesApiApplication;
 import com.example.enotes_api.Entity.Category;
 import com.example.enotes_api.Repository.CategoryRepo;
 import com.example.enotes_api.Service.CategoryService;
+import com.example.enotes_api.Util.Validation;
 
 @Service
 public class CategoryServiceImp implements CategoryService{
+
+    @Autowired
+    private Validation validation; 
 
     @Autowired
     private CategoryRepo categoryRepo;
@@ -28,12 +33,17 @@ public class CategoryServiceImp implements CategoryService{
     //@Autowired
     private CategoryResponseDto categoryResponseDto;
 
+
     @Override
     public Boolean saveCategoryC(CategoryDto categoryDto) {
         //Category category = new Category();
         // category.setName(categoryDto.getName());
         // category.setDescription(categoryDto.getDescription());
         // category.setIs_active(categoryDto.getIs_active());
+
+        //Validation
+        validation.categoryValidation(categoryDto);
+
 
         Category category = mapper.map(categoryDto,Category.class);
 
