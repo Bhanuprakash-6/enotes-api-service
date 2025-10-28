@@ -9,15 +9,20 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
-
+import com.example.enotes_api.Controller.CategoryController;
 import com.example.enotes_api.Dto.CategoryDto;
 import com.example.enotes_api.Dto.CategoryResponseDto;
+import com.example.enotes_api.EnotesApiApplication;
 import com.example.enotes_api.Entity.Category;
 import com.example.enotes_api.Repository.CategoryRepo;
 import com.example.enotes_api.Service.CategoryService;
+import com.example.enotes_api.Util.Validation;
 
 @Service
 public class CategoryServiceImp implements CategoryService{
+
+    @Autowired
+    private Validation validation; 
 
     @Autowired
     private CategoryRepo categoryRepo;
@@ -28,6 +33,7 @@ public class CategoryServiceImp implements CategoryService{
     //@Autowired
     private CategoryResponseDto categoryResponseDto;
 
+
     @Override
     public Boolean saveCategoryC(CategoryDto categoryDto) {
         //Category category = new Category();
@@ -35,11 +41,15 @@ public class CategoryServiceImp implements CategoryService{
         // category.setDescription(categoryDto.getDescription());
         // category.setIs_active(categoryDto.getIs_active());
 
+        //Validation
+        validation.categoryValidation(categoryDto);
+
+
         Category category = mapper.map(categoryDto,Category.class);
 
         if(ObjectUtils.isEmpty(category.getId())){
             category.setIs_delete(false);
-            category.setCreated_by(1);
+            //category.setCreated_by(1);
             category.setCreated_on(new Date());
         }else{
             updateCategory(category);
@@ -63,7 +73,7 @@ public class CategoryServiceImp implements CategoryService{
             category.setCreated_by(exisCategory.getCreated_by());
             category.setCreated_on(exisCategory.getCreated_on());
             category.setIs_delete(exisCategory.getIs_delete());
-            category.setUpdated_by(1);
+            //category.setUpdated_by(1);
             category.setUpdated_on(new Date());
         }
     }
