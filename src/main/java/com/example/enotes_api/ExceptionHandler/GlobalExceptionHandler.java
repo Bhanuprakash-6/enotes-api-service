@@ -3,7 +3,6 @@ package com.example.enotes_api.ExceptionHandler;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -34,8 +33,13 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ValidationException.class)
-    public ResponseEntity<?> handelValidationException(ValidationException e){
+    public ResponseEntity<?> handleValidationException(ValidationException e){
         return new ResponseEntity<>(e.getError(),HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ExistDataException.class)
+    public ResponseEntity<?> handleExistDataException(ExistDataException e){
+        return new ResponseEntity<>(e.getMessage(),HttpStatus.CONFLICT);
     }
 }
 

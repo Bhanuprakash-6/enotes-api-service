@@ -14,6 +14,7 @@ import com.example.enotes_api.Dto.CategoryDto;
 import com.example.enotes_api.Dto.CategoryResponseDto;
 import com.example.enotes_api.EnotesApiApplication;
 import com.example.enotes_api.Entity.Category;
+import com.example.enotes_api.ExceptionHandler.ExistDataException;
 import com.example.enotes_api.Repository.CategoryRepo;
 import com.example.enotes_api.Service.CategoryService;
 import com.example.enotes_api.Util.Validation;
@@ -43,6 +44,12 @@ public class CategoryServiceImp implements CategoryService{
 
         //Validation
         validation.categoryValidation(categoryDto);
+
+        //check existing category name 
+        Boolean exits = categoryRepo.existsByName(categoryDto.getName().trim());
+        if(exits){
+            throw new ExistDataException("category name exist");
+        }
 
 
         Category category = mapper.map(categoryDto,Category.class);
