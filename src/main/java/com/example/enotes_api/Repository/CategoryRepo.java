@@ -32,4 +32,7 @@ public interface CategoryRepo extends JpaRepository<Category,Integer>{
    List<Category> findByActiveTrueAndNotDeleted();
 
 
+   Boolean existsByName(String name);
+
+
 }
