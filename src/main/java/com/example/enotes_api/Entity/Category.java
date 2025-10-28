@@ -28,6 +28,8 @@ public class Category extends BaseModel{
 
     private String description;
 
-    
+    private Boolean is_active;
+
+    private Boolean is_delete;
 
 }

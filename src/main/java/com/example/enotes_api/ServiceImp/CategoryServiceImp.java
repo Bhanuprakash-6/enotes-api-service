@@ -49,7 +49,7 @@ public class CategoryServiceImp implements CategoryService{
 
         if(ObjectUtils.isEmpty(category.getId())){
             category.setIs_delete(false);
-            category.setCreated_by(1);
+            //category.setCreated_by(1);
             category.setCreated_on(new Date());
         }else{
             updateCategory(category);
@@ -73,7 +73,7 @@ public class CategoryServiceImp implements CategoryService{
             category.setCreated_by(exisCategory.getCreated_by());
             category.setCreated_on(exisCategory.getCreated_on());
             category.setIs_delete(exisCategory.getIs_delete());
-            category.setUpdated_by(1);
+            //category.setUpdated_by(1);
             category.setUpdated_on(new Date());
         }
     }
