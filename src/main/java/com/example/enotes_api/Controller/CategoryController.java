@@ -19,6 +19,7 @@ import com.example.enotes_api.Dto.CategoryDto;
 import com.example.enotes_api.Dto.CategoryResponseDto;
 import com.example.enotes_api.Entity.Category;
 import com.example.enotes_api.Service.CategoryService;
+import com.example.enotes_api.Util.CommonUtils;
 
 import jakarta.validation.Valid;
 
@@ -32,9 +33,11 @@ public class CategoryController {
     public ResponseEntity<?> saveCategory(@Valid @RequestBody CategoryDto categoryDto) {
         Boolean savedC = categoryService.saveCategoryC(categoryDto);
         if (savedC) {
-            return new ResponseEntity<>("saved", HttpStatus.CREATED);
+            return CommonUtils.createBuilderResponseMeessage("saved success", HttpStatus.CREATED);
+            //return new ResponseEntity<>("saved", HttpStatus.CREATED);
         } else {
-            return new ResponseEntity<>("not saved", HttpStatus.INTERNAL_SERVER_ERROR);
+            return CommonUtils.createErrorBuilderResponse("not saved ", HttpStatus.INTERNAL_SERVER_ERROR);
+            //return new ResponseEntity<>("not saved", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -44,7 +47,8 @@ public class CategoryController {
         if (org.springframework.util.CollectionUtils.isEmpty(gotC)) {
             return ResponseEntity.noContent().build();
         } else {
-            return new ResponseEntity<>(gotC,HttpStatus.OK);
+            return CommonUtils.createBuilderResponse(gotC, HttpStatus.OK);
+            //return new ResponseEntity<>(gotC,HttpStatus.OK);
         }
     }
 
